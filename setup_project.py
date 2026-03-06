@@ -1,11 +1,4 @@
 #!/usr/bin/env python3
-"""
-Automated setup script - copies all project files to your GitHub repo.
-Run this from your repository root directory.
-
-Usage:
-    python setup_project.py
-"""
 
 import os
 import sys
