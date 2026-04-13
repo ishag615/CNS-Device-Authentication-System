@@ -12,14 +12,21 @@ CREATE TABLE IF NOT EXISTS devices (
   created_at TEXT NOT NULL DEFAULT (datetime('now'))
 );
 
--- replay prevention foundation
 CREATE TABLE IF NOT EXISTS nonces (
-    device_id TEXT NOT NULL,
-    nonce TEXT NOT NULL,
-    issued_at TEXT NOT NULL DEFAULT (datetime('now')),
-    used INTEGER NOT NULL DEFAULT 0,
-    PRIMARY KEY (device_id, nonce),
-    FOREIGN KEY (device_id) REFERENCES devices(device_id) ON DELETE CASCADE
+  device_id TEXT NOT NULL,
+  nonce TEXT NOT NULL,
+  issued_at TEXT NOT NULL DEFAULT (datetime('now')),
+  used INTEGER NOT NULL DEFAULT 0,
+  PRIMARY KEY (device_id, nonce),
+  FOREIGN KEY (device_id) REFERENCES devices(device_id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS tokens (
+  token TEXT PRIMARY KEY,
+  device_id TEXT NOT NULL,
+  expires_at TEXT NOT NULL,
+  created_at TEXT NOT NULL DEFAULT (datetime('now')),
+  FOREIGN KEY (device_id) REFERENCES devices(device_id) ON DELETE CASCADE
 );
 """
 
